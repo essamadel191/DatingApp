@@ -13,7 +13,7 @@ import { catchError } from 'rxjs/operators';
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
 
-  constructor(private router:Router, private taostr:ToastrService) {}
+  constructor(private router:Router, private toastr:ToastrService) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     return next.handle(request).pipe(
@@ -31,12 +31,12 @@ export class ErrorInterceptor implements HttpInterceptor {
                 throw modelStatError.flat();
               }
               else{
-                this.taostr.error(error.statusText === 'OK' ? 'Bad Request' : error.statusText, error.status);
+                this.toastr.error(error.statusText === 'OK' ? 'Bad Request' : error.statusText, error.status);
               }
               break;
             case 401:
-              this.taostr.error(error.statusText === 'OK' ? 'Unauthorised' : error.statusText, error.status);
-              break;
+              this.toastr.error(error.statusText === 'OK' ? 'Unauthorized' : error.statusText, error.status);
+            break;
             case 404:
               this.router.navigateByUrl('/not-found');
               break
@@ -45,7 +45,7 @@ export class ErrorInterceptor implements HttpInterceptor {
               this.router.navigateByUrl('/server-error',navigationExtras);
               break;
             default:
-              this.taostr.error('Something unexpected went wrong');
+              this.toastr.error('Something unexpected went wrong');
               console.log(error);
               break;
           }
