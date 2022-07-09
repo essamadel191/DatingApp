@@ -1,9 +1,8 @@
-<nav class="navbar navbar-expand-sm navbar-dark bg-black">
+<nav class="navbar navbar-expand-md navbar-dark bg-black fixed-top bg">
     <div class="container">
         <div class="container-fluid">
             <a class="navbar-brand" routerLink="/" routerLinkActive="active">Ōta-ku</a>
-
-            <ul class="navbar-nav mr-auto">
+            <ul class="navbar-nav mr-auto mb-2 mb-md-0">
               <ng-container *ngIf="accountService.currentUser$|async">
                 <li class="nav-item">
                   <a class="nav-link" aria-current="page" routerLink="/members" routerLinkActive="active">Matches</a>
@@ -22,8 +21,9 @@
             </ul>
             
             <div class="dropdown" *ngIf="(accountService.currentUser$|async) as user" dropdown>
-                <a class="nav-link dropdown-toggle" aria-haspopup="true" dropdownToggle>Welcome {{user.username |titlecase}}</a>
-                <div class="dropdown-menu" *dropdownMenu>
+                <img src="{{user.photoUrl}}" alt="{{user.username}}">
+                <a class="dropdown-toggle text-light ml-3 text-decoration-none" aria-haspopup="true" dropdownToggle>Welcome {{user.username |titlecase}}</a>
+                <div class="dropdown-menu mt-3" *dropdownMenu>
                   <a routerLink='/member/edit' class="dropdown-item">Edit Profile</a>
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item" (click)="logout()" >Logout</a>
