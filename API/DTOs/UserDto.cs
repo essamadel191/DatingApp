@@ -14,6 +14,8 @@ namespace API.DTOs
         public string Token { get; set; }
         [JsonPropertyName("photoUrl")]
         public string PhotoUrl { get; set; }
+
+        public string KnownAs { get; set; }
         
     }
 }

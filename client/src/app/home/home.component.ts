@@ -18,8 +18,8 @@ export class HomeComponent implements OnInit {
     this.registerMode = true;
   }
 
-  cancelRegisterMode(evetn: boolean){
-    this.registerMode = evetn;
+  cancelRegisterMode(event: boolean){
+    this.registerMode = event;
   }
 
 }
