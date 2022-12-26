@@ -6,8 +6,14 @@
                 <i class="fa fa-user"></i></button></li>
             <li class="list-inline-item"><button (click)="addLike(member)" class="btn btn-sm" style="background-color: #E434DC;">
                 <i class="fa fa-heart"></i></button></li>
-            <li class="list-inline-item"><button class="btn btn-sm btn-primary">
-                <i class="fa fa-envelope"></i></button></li>
+            <li class="list-inline-item">
+                <button 
+                    routerLink="/members/{{member.userName}}"
+                    [queryParams]="{tab:'Messages'}"
+                    class="btn btn-sm btn-primary">
+                    <i class="fa fa-envelope"></i>
+                </button>
+            </li>
         </ul>
     </div>
     <div class="card-body p-1">

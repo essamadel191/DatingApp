@@ -25,6 +25,7 @@ namespace API.Extensions
             services.AddScoped<LogUserActivity>();
             services.AddScoped<ILikesRepository,LikeRepository>();
             services.AddScoped<IUserRepository,UserRepository>();
+            services.AddScoped<IMessageRepository,MessageRepository>();
             
             return services;
         }
