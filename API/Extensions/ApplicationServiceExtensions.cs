@@ -26,6 +26,7 @@ namespace API.Extensions
             services.AddScoped<ILikesRepository,LikeRepository>();
             services.AddScoped<IUserRepository,UserRepository>();
             services.AddScoped<IMessageRepository,MessageRepository>();
+            services.AddSignalR();
             
             return services;
         }
