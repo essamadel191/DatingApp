@@ -4,9 +4,11 @@ using Microsoft.AspNetCore.SignalR;
 using API.DTOs;
 using API.Entities;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 
 namespace API.SignalR
 {
+    [Authorize]
     public class MessageHub :Hub
     {
         private readonly IMessageRepository _messageRepository;
