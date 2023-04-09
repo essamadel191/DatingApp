@@ -12,7 +12,10 @@ namespace API.SignalR
             new Dictionary<string, List<string>>();
         
         // To Track every connections id as every time they log in , they would have a different id
-        public Task UserConnected(string username,string connectionId){
+        // for more efficiency we return a bool to notify instead of searching 
+        public Task <bool> UserConnected(string username,string connectionId){
+            bool isOnline = false;
+
             lock(OnlineUsers)
             {
                 if(OnlineUsers.ContainsKey(username)){
@@ -20,22 +23,26 @@ namespace API.SignalR
                 }
                 else{
                     OnlineUsers.Add(username,new List<string>{connectionId});
+                    isOnline = true;
                 }
             }
-            return Task.CompletedTask;
+            return Task.FromResult(isOnline);
         }
-        public Task UserDisconnected(string username,string connectionId){
+        public Task<bool> UserDisconnected(string username,string connectionId){
+            bool isOffline = false;
+
             lock(OnlineUsers){
-                if(!OnlineUsers.ContainsKey(username)) return Task.CompletedTask;
+                if(!OnlineUsers.ContainsKey(username)) return Task.FromResult(isOffline);
 
                 OnlineUsers[username].Remove(connectionId);
 
                 if(OnlineUsers[username].Count == 0){
                     OnlineUsers.Remove(username);
+                    isOffline = true;
                 }
             }
 
-            return Task.CompletedTask;
+            return Task.FromResult(isOffline);
         }
 
         public Task<string[]> GetOnlineUsers(){
