@@ -53,12 +53,18 @@ namespace API
             app.UseAuthentication();
             app.UseAuthorization();
 
+            // This has to be after authorization
+
+            app.UseDefaultFiles(); // will look for index
+            app.UseStaticFiles(); // will look for wwwroot folder and serve the content
+            
+            // And befor mapping
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
                 endpoints.MapHub<PresenceHub>("hubs/presence");
                 endpoints.MapHub<MessageHub>("hubs/message");   
-                
+                endpoints.MapFallbackToController("Index","Fallback");    
             });
         }
     }

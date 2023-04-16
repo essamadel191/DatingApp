@@ -44,7 +44,6 @@ export class AccountService {
 
     ////////////////////to insure there is an array of roles instead 
     ////////////////////of one role of the type of string
-    
     user.roles = [];
     const roles = this.getDecodedToken(user.token).role;
     Array.isArray(roles) ? user.roles = roles : user.roles.push(roles);
